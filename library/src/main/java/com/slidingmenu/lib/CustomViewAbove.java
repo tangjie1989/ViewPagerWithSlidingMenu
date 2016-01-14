@@ -732,9 +732,6 @@ public class CustomViewAbove extends ViewGroup {
 				int initialVelocity = (int) VelocityTrackerCompat.getXVelocity(
 						velocityTracker, mActivePointerId);
 				final int scrollX = getScrollX();
-				//				final int widthWithMargin = getWidth();
-				//				final float pageOffset = (float) (scrollX % widthWithMargin) / widthWithMargin;
-				// TODO test this. should get better flinging behavior
 				final float pageOffset = (float) (scrollX - getDestScrollX(mCurItem)) / getBehindWidth();
 				final int activePointerIndex = getPointerIndex(ev, mActivePointerId);
 				if (mActivePointerId != INVALID_POINTER) {
@@ -780,7 +777,7 @@ public class CustomViewAbove extends ViewGroup {
 	private void determineDrag(MotionEvent ev) {
 		final int activePointerId = mActivePointerId;
 		final int pointerIndex = getPointerIndex(ev, activePointerId);
-		if (activePointerId == INVALID_POINTER)
+		if (activePointerId == INVALID_POINTER || pointerIndex == INVALID_POINTER)
 			return;
 		final float x = MotionEventCompat.getX(ev, pointerIndex);
 		final float dx = x - mLastMotionX;
@@ -825,23 +822,28 @@ public class CustomViewAbove extends ViewGroup {
 		return Math.abs(mScrollX-mContent.getLeft()) / getBehindWidth();
 	}
 
+	/**
+	 * make change for custom sale
+	 * @param canvas
+	 */
 	@Override
 	protected void dispatchDraw(Canvas canvas) {
-		
+
 		canvas.save();
-		
+
+//		super.dispatchDraw(canvas);
 		// Draw the margin drawable if needed.
 //		mViewBehind.drawShadow(mContent, canvas);
 		mViewBehind.drawFade(mContent, canvas, getPercentOpen());
 		mViewBehind.drawSelector(mContent, canvas, getPercentOpen());
-		
-		float scale = (float) (1-getPercentOpen())*0.25f + 0.75f;
+
+		float scale = (1 - getPercentOpen()) * 0.25f + 0.75f;
 //		System.out.println("percentOpen : " + getPercentOpen() + " scale : " + scale + "\r\n");
 //		System.out.println("\r\n");
 		canvas.scale(scale, scale, 0, canvas.getHeight()/2);//canvas.getWidth()/2
-		
+
 		super.dispatchDraw(canvas);
-		
+
 		canvas.restore();
 	}
 

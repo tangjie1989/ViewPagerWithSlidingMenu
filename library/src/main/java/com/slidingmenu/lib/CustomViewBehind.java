@@ -378,8 +378,8 @@ public class CustomViewBehind extends ViewGroup {
 			left = content.getRight();
 			right = content.getRight() + getBehindWidth();			
 		}
-//		canvas.drawRect(left, 0, right, getHeight(), mFadePaint);
-		canvas.drawRect(left, 0, getWidth(), getHeight(), mFadePaint);
+		//canvas.drawRect(left, 0, getWidth(), getHeight(), mFadePaint);
+		canvas.drawRect(left, 0, right, getHeight(), mFadePaint);
 	}
 	
 	private boolean mSelectorEnabled = true;
