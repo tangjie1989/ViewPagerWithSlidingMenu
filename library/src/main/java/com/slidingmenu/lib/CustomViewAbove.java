@@ -823,7 +823,17 @@ public class CustomViewAbove extends ViewGroup {
 	}
 
 	/**
-	 * make change for custom sale
+	 *
+	 * make change for custom scale
+	 *
+	 * the original is this
+	 *
+		 super.dispatchDraw(canvas);
+		 // Draw the margin drawable if needed.
+		 mViewBehind.drawShadow(mContent, canvas);
+		 mViewBehind.drawFade(mContent, canvas, getPercentOpen());
+		 mViewBehind.drawSelector(mContent, canvas, getPercentOpen());
+	 *
 	 * @param canvas
 	 */
 	@Override
@@ -831,7 +841,6 @@ public class CustomViewAbove extends ViewGroup {
 
 		canvas.save();
 
-//		super.dispatchDraw(canvas);
 		// Draw the margin drawable if needed.
 //		mViewBehind.drawShadow(mContent, canvas);
 		mViewBehind.drawFade(mContent, canvas, getPercentOpen());
