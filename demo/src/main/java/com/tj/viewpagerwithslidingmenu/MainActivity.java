@@ -114,9 +114,9 @@ public class MainActivity extends BaseActivity{
 		});
 	}
 
-	public class ContentPagerAdapter extends FragmentPagerAdapter {
-		
-		public ContentPagerAdapter(FragmentManager fm) {
+	private class ContentPagerAdapter extends FragmentPagerAdapter {
+
+		private ContentPagerAdapter(FragmentManager fm) {
 			super(fm);
 		}
 
@@ -128,7 +128,7 @@ public class MainActivity extends BaseActivity{
 		@Override
 		public Fragment getItem(int position) {
 			Bundle args = new Bundle();
-			args.putString(ContentFragment.FRAGMENT_TITLE, "test");
+			args.putString(ContentFragment.FRAGMENT_TITLE, "page" + (position + 1));
 			return ContentFragment.newInstance(args);
 		}
 
